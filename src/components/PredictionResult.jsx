@@ -1,20 +1,33 @@
-// src/pages/Home.jsx
-import React, { useState } from 'react';
-import { Box } from '@mui/material';
-import PredictionForm from '../components/PredictionForm';
-import PredictionResult from '../components/PredictionResult';
-import VideoUpload from '../components/VideoUpload';
+import React from 'react';
+import { Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 
-const Home = () => {
-  const [prediction, setPrediction] = useState(null);
+const PredictionResult = ({ prediction }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Box sx={{ p: 2 }}>
-      <PredictionForm setPrediction={setPrediction} />
-      {prediction && <PredictionResult prediction={prediction} />}
-      <VideoUpload />
+    <Box 
+      sx={{ 
+        mt: 4, 
+        p: isMobile ? 2 : 4, 
+        border: '1px solid', 
+        borderColor: 'grey.400', 
+        borderRadius: 2, 
+        boxShadow: 1,
+        bgcolor: 'background.paper',
+        width: '100%',
+        maxWidth: isMobile ? '100%' : '75vw',
+        mx: 'auto'
+      }}
+    >
+      <Typography variant={isMobile ? 'h5' : 'h4'} sx={{ mb: 2 }}>
+        Prediction Result
+      </Typography>
+      <Typography variant={isMobile ? 'h6' : 'h5'} color="primary">
+        {prediction}
+      </Typography>
     </Box>
   );
 };
 
-export default Home;
+export default PredictionResult;

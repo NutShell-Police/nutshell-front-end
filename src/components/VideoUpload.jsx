@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Box, Button, Typography, useTheme } from '@mui/material';
+import { Box, Button, Typography, CircularProgress, useTheme } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 
 const VideoUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState('');
   const theme = useTheme();
 
   const onDrop = (acceptedFiles) => {
     setSelectedFile(acceptedFiles[0]);
+    setMessage(`Selected file: ${acceptedFiles[0].name}`);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -22,6 +24,8 @@ const VideoUpload = () => {
       setMessage('Please select a video file first');
       return;
     }
+
+    setUploading(true);
 
     const formData = new FormData();
     formData.append('file', selectedFile);
@@ -36,6 +40,8 @@ const VideoUpload = () => {
     } catch (error) {
       console.error('Error uploading video', error);
       setMessage('Error uploading video');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -63,15 +69,21 @@ const VideoUpload = () => {
           </Typography>
         )}
       </Box>
+      {selectedFile && (
+        <Typography variant="body1" color="textSecondary" sx={{ mt: 2 }}>
+          {message}
+        </Typography>
+      )}
       <Button
         variant="contained"
         color="primary"
         onClick={handleSubmit}
-        disabled={!selectedFile}
+        disabled={!selectedFile || uploading}
+        sx={{ mt: 2 }}
       >
-        Submit
+        {uploading ? <CircularProgress size={24} /> : 'Submit'}
       </Button>
-      {message && (
+      {message && !selectedFile && (
         <Typography
           variant="body1"
           color={message.includes('Accident') ? 'error' : 'primary'}
