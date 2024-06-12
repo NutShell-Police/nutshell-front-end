@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Box, Button, MenuItem, Select, Slider, Typography, CircularProgress, Alert, useMediaQuery, useTheme } from '@mui/material';
 import axios from 'axios';
@@ -107,7 +108,13 @@ const PredictionForm = ({ setPrediction }) => {
         sx={{ mb: 3 }}
       >
         <MenuItem value="" disabled>Accident Spot</MenuItem>
-        {["Bottleneck", "Bridge", "Cross roads", "Not Applicable", "More than four arms", "Road hump or Rumble strips", "Junction", "Curves", "Other", "T Junction", "Offset", "Narrow road", "Culvert", "Staggered junction", "Y Junction", "Circle", "Railway crossing", "Rail Crossing manned", "Round about or Circle", "Rail Crossing Unmanned"].map((spot) => (
+        {[
+          "Bottleneck", "Bridge", "Cross roads", "Not Applicable", "More than four arms",
+          "Road hump or Rumble strips", "Junction", "Curves", "Other", "T Junction",
+          "Offset", "Narrow road", "Culvert", "Staggered junction", "Y Junction", 
+          "Circle", "Railway crossing", "Rail Crossing manned", "Round about or Circle", 
+          "Rail Crossing Unmanned"
+        ].map((spot) => (
           <MenuItem key={spot} value={spot}>{spot}</MenuItem>
         ))}
       </Select>
@@ -143,3 +150,4 @@ const PredictionForm = ({ setPrediction }) => {
 };
 
 export default PredictionForm;
+

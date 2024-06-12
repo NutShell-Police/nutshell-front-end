@@ -1,9 +1,15 @@
 import React from 'react';
 import { Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 
-const PredictionResult = ({ prediction }) => {
+const PredictionResult = ({ prediction, onPredictionChange }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // Function to handle prediction change
+  const handlePredictionChange = (event) => {
+    const newPrediction = event.target.value;
+    onPredictionChange(newPrediction); // Call the parent component's function to update prediction
+  };
 
   return (
     <Box 
@@ -31,3 +37,4 @@ const PredictionResult = ({ prediction }) => {
 };
 
 export default PredictionResult;
+
