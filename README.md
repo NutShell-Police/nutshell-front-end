@@ -10,23 +10,20 @@ A probability model is then developed to predict the likelihood of traffic accid
 
 ## Tech Stack
 <div style="display:flex; justify-content:space-around;">
-    <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" /></a>
-    <a href="https://numpy.org/"><img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy" /></a>
-    <a href="https://pandas.pydata.org/"><img src="https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="pandas" /></a>
-    <a href="https://www.tensorflow.org/"><img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow" /></a>
-    <a href="https://streamlit.io/"><img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit" /></a>
-    <a href="https://opencv.org/"><img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV" /></a>
+    <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React" /></a>
+    <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a>
+    <a href="https://mui.com/"><img src="https://img.shields.io/badge/Material_UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white" alt="Material UI" /></a>
     <a href="https://azure.microsoft.com/"><img src="https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white" alt="Microsoft Azure" /></a>
-    <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a>
 </div>
 
 
-## Architecture Design
+
+## Old Architecture Design
 
 ![KSP diagram (1)](https://github.com/Thirumurugan-12/nutshell-accident/assets/127939893/114c1acd-dab7-4260-834f-d23649e2cb3f)
 
 
-## Snapshots of Final Product
+## Old Snapshots of Final Product
 
 ![Untitled design](https://github.com/Thirumurugan-12/nutshell-accident/assets/127939893/b4b7ad1a-ed28-4d32-9a9f-50224ca46b87)
 
@@ -38,18 +35,18 @@ A probability model is then developed to predict the likelihood of traffic accid
 
 - Install git: [git](https://git-scm.com/download/win)
 - Install VSCode: [VSCODE](https://code.visualstudio.com/)
-- Install Python: [Python](https://www.python.org/downloads/)
+- Install nodejs: [Nodejs](https://nodejs.org/en/download/package-manager)
 
 ## **Clone the project:**
 
  ```bash
-      git clone https://github.com/Thirumurugan-12/nutshell-accident.git
+      git clone https://github.com/NutShell-Police/nutshell-front-end.git
  ```
 
 ## **Go to the project directory and Open Project:**
 
 ```bash
-      cd nutshell-accident
+      cd nutshell-front-end
       code .
 
 ```
@@ -57,7 +54,7 @@ A probability model is then developed to predict the likelihood of traffic accid
 ## Resolving Python Dependencies
 
    ```bash
-         pip install -r requirements.txt
+         npm install
    ```
 
 ## Run you Application
@@ -65,9 +62,9 @@ A probability model is then developed to predict the likelihood of traffic accid
   Run you Application by Executing. 
     </br>
 ```bash
-   streamlit run app.py
+     npm run dev
 ```
-go to [LocalHost](http://localhost:8501/) to View your Live app.
+go to [LocalHost](http://localhost:5173/) to View your Live app.
 
 ## What positive and unique solutions your idea have?
 
