@@ -7,7 +7,10 @@ function Header() {
   return (
     <AppBar position="static" color="primary">
       <Toolbar>
-        <Box component="img" src={logo} alt="Nut Shell Logo" sx={{ height: 80, mr: 2, p: 1 }} />
+      <Button color="inherit" component={Link} to="/">
+      <Box component="img" src={logo} alt="Nut Shell Logo" sx={{ height: 80, mr: 2, p: 1 }} />
+      </Button>
+        
         <Typography variant="h4" sx={{ flexGrow: 1 }}>
           NutShell
         </Typography>
