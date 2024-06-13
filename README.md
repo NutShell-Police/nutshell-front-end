@@ -1,5 +1,5 @@
 # <a href= "https://nutshell.azurewebsites.net/">NutShell</a> 
-### Live Website Hosted on Microsoft Azure Cloud Platform ->  [Click Here](https://nutshell.azurewebsites.net/)
+### Previous Live Website Hosted on Microsoft Azure Cloud Platform ->  [Click Here](https://nutshell.azurewebsites.net/)
 <a href="https://nutshell.azurewebsites.net/">
     <img align="right" width="200" src="https://github.com/Thirumurugan-12/nutshell-accident/assets/127939893/28036c6e-61db-4481-9a9f-4220e4539a9e" style="border-radius: 50%">
 </a>
@@ -18,9 +18,9 @@ A probability model is then developed to predict the likelihood of traffic accid
 
 
 
-## Old Architecture Design
+## Architecture Design
 
-![KSP diagram (1)](https://github.com/Thirumurugan-12/nutshell-accident/assets/127939893/114c1acd-dab7-4260-834f-d23649e2cb3f)
+![KSP diagram](https://github.com/NutShell-Police/nutshell-front-end/assets/127939893/84642b21-2e6d-47b8-86c4-6e62ac6a4bf1)
 
 
 ## Old Snapshots of Final Product
