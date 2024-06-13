@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Box, Button, MenuItem, Select, Slider, Typography, CircularProgress, Alert, useMediaQuery, useTheme } from '@mui/material';
 import axios from 'axios';
@@ -59,16 +58,14 @@ const PredictionForm = ({ setPrediction }) => {
       onSubmit={handleSubmit} 
       sx={{ 
         width: '100%',
-        maxWidth: isMobile ? '100%' : '75vw', 
-        mx: 'auto', 
-        p: isMobile ? 2 : 3, 
+        p: isMobile ? 1 : 2,
         boxShadow: 3, 
         borderRadius: 2,
         bgcolor: 'background.paper'
       }}
     >
-      <Typography variant={isMobile ? 'h5' : 'h4'} sx={{ mb: 2 }}>Prediction Form</Typography>
-      <Typography variant="h6" sx={{ mb: 2 }}>Please enter the following inputs:</Typography>
+      <Typography variant={isMobile ? 'h5' : 'h4'} sx={{ mb: 1 }}>Prediction Form</Typography>
+      <Typography variant="h6" sx={{ mb: 1 }}>Please enter the following inputs:</Typography>
 
       <Typography variant="body1" sx={{ mb: 1 }}>No of vehicle involved:</Typography>
       <Slider
@@ -81,7 +78,7 @@ const PredictionForm = ({ setPrediction }) => {
         marks
         min={1}
         max={10}
-        sx={{ mb: 3 }}
+        sx={{ mb: 2 }}
       />
 
       <Select
@@ -90,7 +87,7 @@ const PredictionForm = ({ setPrediction }) => {
         onChange={handleChange}
         displayEmpty
         fullWidth
-        sx={{ mb: 3 }}
+        sx={{ mb: 2 }}
       >
         <MenuItem value="" disabled>Accident Classification</MenuItem>
         <MenuItem value="Road Accidents">Road Accidents</MenuItem>
@@ -105,7 +102,7 @@ const PredictionForm = ({ setPrediction }) => {
         onChange={handleChange}
         displayEmpty
         fullWidth
-        sx={{ mb: 3 }}
+        sx={{ mb: 2 }}
       >
         <MenuItem value="" disabled>Accident Spot</MenuItem>
         {[
@@ -125,7 +122,7 @@ const PredictionForm = ({ setPrediction }) => {
         onChange={handleChange}
         displayEmpty
         fullWidth
-        sx={{ mb: 3 }}
+        sx={{ mb: 2 }}
       >
         <MenuItem value="" disabled>Accident Location</MenuItem>
         {["Rural Areas", "Villages settlement", "City/Town", "Not Applicable"].map((location) => (
@@ -150,4 +147,3 @@ const PredictionForm = ({ setPrediction }) => {
 };
 
 export default PredictionForm;
-
