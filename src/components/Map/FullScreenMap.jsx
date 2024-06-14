@@ -19,8 +19,8 @@ const FullScreenMap = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            prediction: 'initial_prediction', // Replace with your initial prediction or remove if not needed
-            len: 1000 // Initial data length
+            prediction,
+            len: 1000
           }),
         });
 

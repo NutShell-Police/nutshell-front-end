@@ -24,7 +24,7 @@ const MapSection = ({ prediction }) => {
           },
           body: JSON.stringify({
             prediction,
-            len
+            len: 1000
           }),
         });
 
