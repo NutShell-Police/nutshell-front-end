@@ -22,7 +22,7 @@ const Map = ({ prediction }) => {
           },
           body: JSON.stringify({
             prediction,
-            len: 58000
+            len: 1000
           }),
         });
 
