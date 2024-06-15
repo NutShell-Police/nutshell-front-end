@@ -7,6 +7,7 @@ import VideoUploadPage from './pages/VideoUploadPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import FullScreenMap from './components/Map/FullScreenMap';
+import StreamlitComponent  from './components/Detection';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/upload-video" element={<VideoUploadPage />} />
           <Route path="/map" element={<FullScreenMap />} />
+          <Route path="/detection" element={<StreamlitComponent />} />
         </Routes>
       </Container>
       <Footer />
