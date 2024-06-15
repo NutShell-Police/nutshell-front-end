@@ -1,8 +1,9 @@
+import { padding } from '@mui/system';
 import React from 'react';
 
 const StreamlitComponent = () => {
   return (
-    <div>
+    <div s>
       <iframe 
         title="Streamlit Component"
         width="100%" 
@@ -10,6 +11,7 @@ const StreamlitComponent = () => {
         src="https://nutshell-embed.azurewebsites.net/?embed=true" 
         frameborder="0" 
         allowfullscreen
+        
       ></iframe>
     </div>
   );
