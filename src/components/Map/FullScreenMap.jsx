@@ -1,15 +1,14 @@
-
-//components/Map/FullScreenMap.jsx
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Box } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { Box, Typography, useMediaQuery, useTheme, Button, Dialog, DialogContent, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 const FullScreenMap = () => {
-  const location = useLocation();
-  const { prediction } = location.state || {};
   const [accidentProneAreas, setAccidentProneAreas] = useState([]);
+  const [open, setOpen] = useState(true); // Initially open the full-screen map
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const fetchAccidentData = async () => {
@@ -21,13 +20,12 @@ const FullScreenMap = () => {
           },
           body: JSON.stringify({
             prediction,
-            len: 58000
+            len: 1000
           }),
         });
 
         if (response.ok) {
           const data = await response.json();
-          console.log('Fetched accident-prone areas:', data);
           setAccidentProneAreas(data);
         } else {
           console.error('Failed to fetch accident-prone areas data. Server responded with status:', response.status);
@@ -37,47 +35,59 @@ const FullScreenMap = () => {
       }
     };
 
-    if (prediction) {
-      fetchAccidentData();
-    }
-  }, [prediction]);
+    fetchAccidentData();
+  }, []);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <Box sx={{ maxWidth: '1280px', margin: '0 auto', padding: '2rem', textAlign: 'center' }}>
-      <div style={{ height: 'calc(100vh - 2rem - 12em)' }}>
-        <MapContainer center={[0, 0]} zoom={2} style={{ height: '100%', width: '100%' }}>
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {accidentProneAreas.map((area, index) => {
-            if (typeof area.LATITUDE === 'number' && typeof area.LONGITUDE === 'number' && area.LATITUDE !== 0 && area.LONGITUDE !== 0) {
-              return (
-                <CircleMarker
-                  key={index}
-                  center={[area.LATITUDE, area.LONGITUDE]}
-                  radius={10}
-                  color="red"
-                >
-                  <Popup>
-                    <div>
-                      <strong>Accident Spot:</strong> {area.spot}<br/>
-                      <strong>Latitude:</strong> {area.LATITUDE.toFixed(6)}<br/>
-                      <strong>Longitude:</strong> {area.LONGITUDE.toFixed(6)}<br/>
-                      <strong>Main Cause:</strong> {area.main_cause || 'N/A'}<br/>
-                      <strong>Road Condition:</strong> {area.road_condition || 'N/A'}<br/>
-                      <strong>Severity:</strong> {area.severity || 'N/A'}<br/>
-                      <strong>Weather:</strong> {area.weather || 'N/A'}<br/>
-                    </div>
-                  </Popup>
-                </CircleMarker>
-              );
-            }
-            return null;
-          })}
-        </MapContainer>
-      </div>
-    </Box>
+    <Dialog
+      fullScreen
+      open={open}
+      onClose={handleClose}
+    >
+      <DialogContent sx={{ p: 4 }}>
+        <IconButton
+          edge="start"
+          color="inherit"
+          onClick={handleClose}
+          aria-label="close"
+          sx={{ position: 'absolute', right: 16, top: 16, zIndex: 1 }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <Box sx={{ width: '100%', height: 'calc(100vh - 4rem)', padding: '2rem 0' }}>
+          <MapContainer center={[15.3173, 75.7139]} zoom={7} style={{ height: '100%', width: '100%' }}>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {accidentProneAreas.map((area, index) => (
+              <CircleMarker
+                key={index}
+                center={[area.LATITUDE, area.LONGITUDE]}
+                radius={10}
+                color="red"
+              >
+                <Popup>
+                  <div>
+                    <strong>Accident Spot:</strong> {area.spot}<br/>
+                    <strong>Latitude:</strong> {area.LATITUDE}<br/>
+                    <strong>Longitude:</strong> {area.LONGITUDE}<br/>
+                    <strong>Main Cause:</strong> {area.main_cause}<br/>
+                    <strong>Road Condition:</strong> {area.road_condition}<br/>
+                    <strong>Severity:</strong> {area.severity}<br/>
+                    <strong>Weather:</strong> {area.weather}
+                  </div>
+                </Popup>
+              </CircleMarker>
+            ))}
+          </MapContainer>
+        </Box>
+      </DialogContent>
+    </Dialog>
   );
 };
 
