@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 import axios from 'axios';
 
-const PredictionResult = ({ prediction, onPredictionChange }) => {
+const severityColors = {
+  'Damage Only': 'gray',
+  'Fatal': 'black',
+  'Grievous Injury': 'red',
+  'Simple Injury': 'yellow',
+  'Unknown': 'blue'
+};
+
+const PredictionResult = ({ prediction }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [severityInfo, setSeverityInfo] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Function to handle prediction change
-  const handlePredictionChange = (event) => {
-    const newPrediction = event.target.value;
-    onPredictionChange(newPrediction); // Call the parent component's function to update prediction
-  };
-
-  // Function to fetch additional information based on severity
   const fetchSeverityInfo = async (prediction) => {
     setLoading(true);
     try {
@@ -39,14 +40,10 @@ const PredictionResult = ({ prediction, onPredictionChange }) => {
         }
       );
 
-      // Check if response contains candidates and it's not empty
       if (response.data?.candidates && response.data.candidates.length > 0) {
         const generatedContent = response.data.candidates[0].content.parts[0].text;
-        
-        // Clean up the content and create bullet points
         const cleanedContent = generatedContent.replace(/\*\*/g, '').replace(/\*/g, '').replace(/undefined/g, '');
         const bulletPoints = cleanedContent.split('\n').filter(line => line.trim() !== '');
-        
         setSeverityInfo(bulletPoints);
       } else {
         throw new Error('Invalid response structure from API');
@@ -65,6 +62,8 @@ const PredictionResult = ({ prediction, onPredictionChange }) => {
     }
   }, [prediction]);
 
+  const severityColor = useMemo(() => severityColors[prediction] || 'black', [prediction]);
+
   return (
     <Box 
       sx={{ 
@@ -81,7 +80,7 @@ const PredictionResult = ({ prediction, onPredictionChange }) => {
       <Typography variant={isMobile ? 'h5' : 'h4'} sx={{ mb: 1 }}>
         Prediction Result
       </Typography>
-      <Typography variant={isMobile ? 'h6' : 'h5'} color="primary">
+      <Typography variant={isMobile ? 'h6' : 'h5'} style={{ color: severityColor }}>
         {prediction}
       </Typography>
 

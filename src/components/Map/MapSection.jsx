@@ -5,42 +5,50 @@ import { Box, Typography, useMediaQuery, useTheme, IconButton, Dialog, DialogCon
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 
+const severityColors = {
+  'Damage Only': 'gray',
+  'Fatal': 'black',
+  'Grievous Injury': 'red',
+  'Simple Injury': 'yellow',
+  'Unknown': 'blue'
+};
+
 const MapSection = ({ prediction }) => {
   const [accidentProneAreas, setAccidentProneAreas] = useState([]);
   const [open, setOpen] = useState(false);
-  const [dataLength, setDataLength] = useState(8000); // Initial data length to fetch
+  const [dataLength, setDataLength] = useState(8000);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  useEffect(() => {
-    const fetchAccidentData = async (len) => {
-      setLoading(true); // Set loading state to true while fetching data
-      try {
-        const response = await fetch('https://nutshell-api.azurewebsites.net/process_data', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            prediction,
-            len: 1000
-          }),
-        });
+  const fetchAccidentData = async (len) => {
+    setLoading(true);
+    try {
+      const response = await fetch('https://nutshell-api.azurewebsites.net/process_data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prediction,
+          len: 1000
+        }),
+      });
 
-        if (response.ok) {
-          const data = await response.json();
-          setAccidentProneAreas(data);
-        } else {
-          console.error('Failed to fetch accident-prone areas data. Server responded with status:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching accident-prone areas:', error);
-      } finally {
-        setLoading(false); // Set loading state to false after fetching data
+      if (response.ok) {
+        const data = await response.json();
+        setAccidentProneAreas(data);
+      } else {
+        console.error('Failed to fetch accident-prone areas data. Server responded with status:', response.status);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching accident-prone areas:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     if (prediction) {
       fetchAccidentData(dataLength);
     }
@@ -108,7 +116,7 @@ const MapSection = ({ prediction }) => {
                   key={index}
                   center={[area.LATITUDE, area.LONGITUDE]}
                   radius={10}
-                  color="red"
+                  color={severityColors[area.severity] || 'gray'}
                 >
                   <Popup>
                     <div>
@@ -126,50 +134,55 @@ const MapSection = ({ prediction }) => {
             </MapContainer>
           )}
         </Box>
+        <Button onClick={handleLoadMore} variant="contained" color="primary" disabled={dataLength >= 48000}>
+          Load More Data
+        </Button>
       </Box>
-
-      <Dialog fullScreen open={open} onClose={handleClose}>
-        <DialogContent sx={{ p: 4 }}>
+      <Dialog open={open} onClose={handleClose} fullScreen>
+        <DialogContent>
           <IconButton
             edge="start"
             color="inherit"
             onClick={handleClose}
             aria-label="close"
-            sx={{ position: 'absolute', right: 16, top: 16, zIndex: 1 }}
+            sx={{ position: 'absolute', top: isMobile ? '0.5rem' : '1rem', right: isMobile ? '0.5rem' : '1rem' }}
           >
             <CloseIcon />
           </IconButton>
-          <Box sx={{ width: '100%', height: 'calc(100vh - 8rem)', padding: '2rem' }}>
-            <MapContainer center={[15.3173, 78.4760]} zoom={6} style={{ height: '100%', width: '100%' }}>
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              />
-              {accidentProneAreas.map((area, index) => (
-                <CircleMarker
-                  key={index}
-                  center={[area.LATITUDE, area.LONGITUDE]}
-                  radius={10}
-                  color="red"
-                >
-                  <Popup>
-                    <div>
-                      <strong>Accident Spot:</strong> {area.spot}<br />
-                      <strong>Latitude:</strong> {area.LATITUDE}<br />
-                      <strong>Longitude:</strong> {area.LONGITUDE}<br />
-                      <strong>Main Cause:</strong> {area.main_cause}<br />
-                      <strong>Road Condition:</strong> {area.road_condition}<br />
-                      <strong>Severity:</strong> {area.severity}<br />
-                      <strong>Weather:</strong> {area.weather}
-                    </div>
-                  </Popup>
-                </CircleMarker>
-              ))}
-            </MapContainer>
+          <Box sx={{ width: '100%', height: '100vh' }}>
+            {loading ? (
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                <CircularProgress />
+              </Box>
+            ) : (
+              <MapContainer center={[15.3173, 78.4760]} zoom={6} style={{ height: '100%', width: '100%' }}>
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                {accidentProneAreas.map((area, index) => (
+                  <CircleMarker
+                    key={index}
+                    center={[area.LATITUDE, area.LONGITUDE]}
+                    radius={10}
+                    color={severityColors[area.severity] || 'gray'}
+                  >
+                    <Popup>
+                      <div>
+                        <strong>Accident Spot:</strong> {area.spot}<br />
+                        <strong>Latitude:</strong> {area.LATITUDE}<br />
+                        <strong>Longitude:</strong> {area.LONGITUDE}<br />
+                        <strong>Main Cause:</strong> {area.main_cause}<br />
+                        <strong>Road Condition:</strong> {area.road_condition}<br />
+                        <strong>Severity:</strong> {area.severity}<br />
+                        <strong>Weather:</strong> {area.weather}
+                      </div>
+                    </Popup>
+                  </CircleMarker>
+                ))}
+              </MapContainer>
+            )}
           </Box>
-          <Button variant="contained" color="primary" onClick={handleLoadMore} sx={{ mt: 2 }}>
-            Load More Data
-          </Button>
         </DialogContent>
       </Dialog>
     </>
