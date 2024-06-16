@@ -8,9 +8,11 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import FullScreenMap from './components/Map/FullScreenMap';
 import StreamlitComponent  from './components/Detection';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   return (
+    <>
     <Box
       sx={{
         display: 'flex',
@@ -36,6 +38,8 @@ function App() {
       </Container>
       <Footer />
     </Box>
+    <Analytics />
+    </>
   );
 }
 
