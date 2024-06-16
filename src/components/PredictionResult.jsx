@@ -3,7 +3,7 @@ import { Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 import axios from 'axios';
 
 const severityColors = {
-  'Damage Only': 'gray',
+  'Damage Only': 'orange',
   'Fatal': 'black',
   'Grievous Injury': 'red',
   'Simple Injury': 'yellow',

@@ -4,9 +4,10 @@ import 'leaflet/dist/leaflet.css';
 import { Box, Typography, useMediaQuery, useTheme, IconButton, Dialog, DialogContent, Button, CircularProgress } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
+import axios from 'axios';
 
 const severityColors = {
-  'Damage Only': 'gray',
+  'Damage Only': 'orange',
   'Fatal': 'black',
   'Grievous Injury': 'red',
   'Simple Injury': 'yellow',
@@ -16,28 +17,58 @@ const severityColors = {
 const MapSection = ({ prediction }) => {
   const [accidentProneAreas, setAccidentProneAreas] = useState([]);
   const [open, setOpen] = useState(false);
-  const [dataLength, setDataLength] = useState(8000);
+  const [dataLength, setDataLength] = useState(3000);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+  // const fetchWeatherData = async (lat, lon) => {
+  //   try {
+  //     const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+  //       params: {
+  //         lat,
+  //         lon,
+  //         appid: process.env.REACT_APP_OPENWEATHERMAP_API_KEY,
+  //       },
+  //     });
+  //     return response.data.weather[0].description;
+  //   } catch (error) {
+  //     console.error('Error fetching weather data:', error);
+  //     return 'Unknown';
+  //   }
+  // };
+
+  // const fetchPlaceName = async (lat, lon) => {
+  //   try {
+  //     const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+  //       params: {
+  //         latlng: `${lat},${lon}`,
+  //         key: process.env.REACT_APP_GOOGLE_API_KEY,
+  //       },
+  //     });
+  //     return response.data.results[0]?.formatted_address || 'Unknown';
+  //   } catch (error) {
+  //     console.error('Error fetching place name:', error);
+  //     return 'Unknown';
+  //   }
+  // };
+
   const fetchAccidentData = async (len) => {
     setLoading(true);
     try {
-      const response = await fetch('https://nutshell-api.azurewebsites.net/process_data', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prediction,
-          len
-        }),
+      const response = await axios.post('https://nutshell-api.azurewebsites.net/process_data', {
+        prediction,
+        len
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setAccidentProneAreas(data);
+      if (response.status === 200) {
+        const data = await response.data;
+        const enrichedData = await Promise.all(data.map(async (area) => {
+          const weather = await fetchWeatherData(area.LATITUDE, area.LONGITUDE);
+          const place = await fetchPlaceName(area.LATITUDE, area.LONGITUDE);
+          return { ...area, weather, place };
+        }));
+        setAccidentProneAreas(enrichedData);
       } else {
         console.error('Failed to fetch accident-prone areas data. Server responded with status:', response.status);
       }
@@ -64,11 +95,11 @@ const MapSection = ({ prediction }) => {
 
   const handleLoadMore = () => {
     if (dataLength < 48000) {
-      setDataLength((prevLength) => prevLength + 10000);
+      setDataLength((prevLength) => prevLength + 5000);
     }
   };
 
-  const severityColor = useMemo(() => severityColors[prediction] || 'gray', [prediction]);
+  const severityColor = useMemo(() => severityColors[prediction] || 'red', [prediction]);
 
   return (
     <>
@@ -122,12 +153,12 @@ const MapSection = ({ prediction }) => {
                 >
                   <Popup>
                     <div>
-                      <strong>Accident Spot:</strong> {area.spot}<br />
+                      <strong>Accident Spot:</strong> {area.place}<br />
                       <strong>Latitude:</strong> {area.LATITUDE}<br />
                       <strong>Longitude:</strong> {area.LONGITUDE}<br />
-                      <strong>Main Cause:</strong> {area.main_cause}<br />
-                      <strong>Road Condition:</strong> {area.road_condition}<br />
-                      <strong>Severity:</strong> {area.severity}<br />
+                      <strong>Main Cause:</strong> {area.main_cause || 'Unknown'}<br />
+                      <strong>Road Condition:</strong> {area.road_condition || 'Unknown'}<br />
+                      <strong>Severity:</strong> {prediction}<br />
                       <strong>Weather:</strong> {area.weather}
                     </div>
                   </Popup>
@@ -171,12 +202,12 @@ const MapSection = ({ prediction }) => {
                   >
                     <Popup>
                       <div>
-                        <strong>Accident Spot:</strong> {area.spot}<br />
+                        <strong>Accident Spot:</strong> {area.place}<br />
                         <strong>Latitude:</strong> {area.LATITUDE}<br />
                         <strong>Longitude:</strong> {area.LONGITUDE}<br />
-                        <strong>Main Cause:</strong> {area.main_cause}<br />
-                        <strong>Road Condition:</strong> {area.road_condition}<br />
-                        <strong>Severity:</strong> {area.severity}<br />
+                        <strong>Main Cause:</strong> {area.main_cause || 'Unknown'}<br />
+                        <strong>Road Condition:</strong> {area.road_condition || 'Unknown'}<br />
+                        <strong>Severity:</strong> {prediction}<br />
                         <strong>Weather:</strong> {area.weather}
                       </div>
                     </Popup>
