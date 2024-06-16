@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import FullScreenMap from './components/Map/FullScreenMap';
 import StreamlitComponent  from './components/Detection';
 import { Analytics } from "@vercel/analytics/react"
+import  PowerBiReport  from './components/PowerBi';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/upload-video" element={<VideoUploadPage />} />
           <Route path="/map" element={<FullScreenMap />} />
           <Route path="/detection" element={<StreamlitComponent />} />
+          <Route path="/report" element={<PowerBiReport />} />
         </Routes>
       </Container>
       <Footer />
