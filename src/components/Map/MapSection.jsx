@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Box, Typography, useMediaQuery, useTheme, IconButton, Dialog, DialogContent, Button, CircularProgress } from '@mui/material';
@@ -31,7 +31,7 @@ const MapSection = ({ prediction }) => {
         },
         body: JSON.stringify({
           prediction,
-          len: 1000
+          len
         }),
       });
 
@@ -67,6 +67,8 @@ const MapSection = ({ prediction }) => {
       setDataLength((prevLength) => prevLength + 10000);
     }
   };
+
+  const severityColor = useMemo(() => severityColors[prediction] || 'gray', [prediction]);
 
   return (
     <>
@@ -116,7 +118,7 @@ const MapSection = ({ prediction }) => {
                   key={index}
                   center={[area.LATITUDE, area.LONGITUDE]}
                   radius={10}
-                  color={severityColors[area.severity] || 'gray'}
+                  color={severityColor}
                 >
                   <Popup>
                     <div>
@@ -165,7 +167,7 @@ const MapSection = ({ prediction }) => {
                     key={index}
                     center={[area.LATITUDE, area.LONGITUDE]}
                     radius={10}
-                    color={severityColors[area.severity] || 'gray'}
+                    color={severityColor}
                   >
                     <Popup>
                       <div>

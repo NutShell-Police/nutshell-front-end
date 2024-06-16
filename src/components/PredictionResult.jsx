@@ -20,7 +20,6 @@ const PredictionResult = ({ prediction }) => {
     setLoading(true);
     try {
       const apiKey = import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY;
-      console.log('API Key:', apiKey); // Log the API key for debugging
       const response = await axios.post(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
         {
@@ -41,7 +40,6 @@ const PredictionResult = ({ prediction }) => {
         }
       );
 
-      console.log('API response:', response); // Log the full response
 
       if (response.data?.candidates && response.data.candidates.length > 0) {
         const generatedContent = response.data.candidates[0].content.parts[0].text;
