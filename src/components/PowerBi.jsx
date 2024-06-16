@@ -6,7 +6,7 @@ const PowerBiReport = () =>{
     title="accident" 
     width="100%" 
     height="800px" 
-    src="https://app.powerbi.com/reportEmbed?reportId=6e0baca8-e05d-42d2-97ed-c4ee25271069&autoAuth=true&ctid=84c31ca0-ac3b-4eae-ad11-519d80233e6f" 
+    src="https://app.powerbi.com/view?r=eyJrIjoiZjVlNDliNWQtYWE2Yy00MDNjLWFlMjktNGFhZWFjOTRlNmFiIiwidCI6Ijg0YzMxY2EwLWFjM2ItNGVhZS1hZDExLTUxOWQ4MDIzM2U2ZiIsImMiOjZ9" 
     frameborder="0" 
     allowFullScreen="true">
     </iframe>
