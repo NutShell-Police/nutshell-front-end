@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 import axios from 'axios';
 
-const PredictionResult = ({ prediction }) => {
+const PredictionResult = ({ prediction, onPredictionChange }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [severityInfo, setSeverityInfo] = useState([]);
@@ -19,7 +18,7 @@ const PredictionResult = ({ prediction }) => {
   const fetchSeverityInfo = async (prediction) => {
     setLoading(true);
     try {
-      const apiKey = 'AIzaSyCrCYrEs3xJjw5fwCZDDMN5hVOGMqR-yOk'; // Replace with your actual API key
+      const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
       const response = await axios.post(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
         {
@@ -45,7 +44,7 @@ const PredictionResult = ({ prediction }) => {
         const generatedContent = response.data.candidates[0].content.parts[0].text;
         
         // Clean up the content and create bullet points
-        const cleanedContent = generatedContent.replace(/\*\*/g,).replace(/\*/g,).replace(/undefined/g, '');
+        const cleanedContent = generatedContent.replace(/\*\*/g, '').replace(/\*/g, '').replace(/undefined/g, '');
         const bulletPoints = cleanedContent.split('\n').filter(line => line.trim() !== '');
         
         setSeverityInfo(bulletPoints);
