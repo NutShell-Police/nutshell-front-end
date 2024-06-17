@@ -3,7 +3,7 @@ import { Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 import axios from 'axios';
 
 const severityColors = {
-  'Damage Only': 'orange',
+  'Damage Only': 'gray',
   'Fatal': 'black',
   'Grievous Injury': 'red',
   'Simple Injury': 'yellow',
@@ -20,19 +20,28 @@ const PredictionResult = ({ prediction }) => {
     setLoading(true);
     try {
       const apiKey = import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY;
+      console.log('API Key:', apiKey); // Debugging line
+      if (!apiKey) {
+        throw new Error('API key is missing');
+      }
+
+      const requestBody = {
+        contents: [
+          {
+            parts: [
+              {
+                text: `what is ${prediction} in accident in short?`
+              }
+            ]
+          }
+        ]
+      };
+
+      console.log('Request Payload:', requestBody); // Debugging line
+
       const response = await axios.post(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
-        {
-          contents: [
-            {
-              parts: [
-                {
-                  text: `what is ${prediction} in accident in short?`
-                }
-              ]
-            }
-          ]
-        },
+        requestBody,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -40,10 +49,11 @@ const PredictionResult = ({ prediction }) => {
         }
       );
 
+      console.log('Response:', response.data); // Debugging line
 
       if (response.data?.candidates && response.data.candidates.length > 0) {
         const generatedContent = response.data.candidates[0].content.parts[0].text;
-        const cleanedContent = generatedContent.replace(/\*\*/g, '').replace(/\*/g, '').replace(/undefined/g, '');
+        const cleanedContent = generatedContent.replace(/\\/g, '').replace(/\*/g, '').replace(/undefined/g, '');
         const bulletPoints = cleanedContent.split('\n').filter(line => line.trim() !== '');
         setSeverityInfo(bulletPoints);
       } else {

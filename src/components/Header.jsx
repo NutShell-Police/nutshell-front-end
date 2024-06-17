@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   AppBar,
   Toolbar,
-  Typography,
   Button,
   Box,
   IconButton,
@@ -40,6 +39,7 @@ function Header() {
         bgcolor: 'primary.main',
         color: 'white',
         height: '100%',
+        fontFamily: 'Nunito, sans-serif',
       }}
       role="presentation"
       onClick={toggleDrawer(false)}
@@ -58,6 +58,12 @@ function Header() {
           </ListItemIcon>
           <ListItemText primary="Upload Video" />
         </ListItem>
+        <ListItem button component={Link} to="/detection">
+          <ListItemIcon sx={{ color: 'white' }}>
+            <UploadFileIcon />
+          </ListItemIcon>
+          <ListItemText primary="Detection" />
+        </ListItem>
         <ListItem button component={Link} to="/about">
           <ListItemIcon sx={{ color: 'white' }}>
             <InfoIcon />
@@ -69,15 +75,26 @@ function Header() {
   );
 
   return (
-    <AppBar position="static" color="primary">
-      <Toolbar>
-        <Button color="inherit" component={Link} to="/">
-          <Box component="img" src={logo} alt="Nut Shell Logo" sx={{ height: 80, mr: 2, p: 1 }} />
-        </Button>
-        <Typography variant="h4" sx={{ flexGrow: 1 }}>
-          NutShell
-        </Typography>
-        {isMobile ? (
+    <AppBar position="static" color="primary" sx={{ fontFamily: 'Nunito, sans-serif' }}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Button color="inherit" component={Link} to="/" sx={{ mr: 2 }}>
+            <Box component="img" src={logo} alt="Nut Shell Logo" sx={{ height: 80, p: 1 }} />
+          </Button>
+          {!isMobile && (
+            <>
+              <Button color="inherit" component={Link} to="/">Home</Button>
+              <Button color="inherit" component={Link} to="/upload-video">Upload Video</Button>
+              <Button color="inherit" component={Link} to="/detection">Detection</Button>
+            </>
+          )}
+        </Box>
+        {!isMobile && (
+          <Box sx={{ marginLeft: 'auto' }}>
+            <Button color="inherit" component={Link} to="/about">About</Button>
+          </Box>
+        )}
+        {isMobile && (
           <>
             <IconButton color="inherit" onClick={toggleDrawer(true)}>
               <MenuIcon />
@@ -86,13 +103,6 @@ function Header() {
               {menuItems}
             </Drawer>
           </>
-        ) : (
-          <>
-            <Button color="inherit" component={Link} to="/">Home</Button>
-            <Button color="inherit" component={Link} to="/upload-video">Upload Video</Button>
-            <Button color="inherit" component={Link} to="/about">About</Button>
-            <Button color="inherit" component={Link} to="/detection">Detection</Button>
-          </>
         )}
       </Toolbar>
     </AppBar>
@@ -100,3 +110,4 @@ function Header() {
 }
 
 export default Header;
+
