@@ -89,12 +89,11 @@ function Header() {
             </>
           )}
         </Box>
-        {!isMobile && (
+        {!isMobile ? (
           <Box sx={{ marginLeft: 'auto' }}>
             <Button color="inherit" component={Link} to="/about">About</Button>
           </Box>
-        )}
-        {isMobile && (
+        ) : (
           <>
             <IconButton color="inherit" onClick={toggleDrawer(true)}>
               <MenuIcon />
@@ -103,7 +102,8 @@ function Header() {
               {menuItems}
             </Drawer>
           </>
-        ) : (
+        )}
+        {!isMobile && (
           <>
             <Button color="inherit" component={Link} to="/">Home</Button>
             <Button color="inherit" component={Link} to="/upload-video">Upload Video</Button>
@@ -118,4 +118,3 @@ function Header() {
 }
 
 export default Header;
-
