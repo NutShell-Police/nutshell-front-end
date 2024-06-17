@@ -1,8 +1,6 @@
-
-
-// src/components/charts/ChartsSection.js
 import React, { useEffect, useState } from 'react';
 import 'chart.js/auto'; // Import the complete Chart.js bundle
+import { Grid, Typography, Box } from '@mui/material'; // Import Box and Typography from MUI
 import BarChart from './Bargraph';
 import LineChart from './LineGraph';
 import PieChart from './Piechart';
@@ -75,40 +73,89 @@ const ChartsSection = ({ prediction }) => {
   });
 
   return (
-    <div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <BarChart data={prepareChartData(yearData, 'Accident Spot Data', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)')} 
-          title="Yearly Data" 
-          xAxisTitle="Year"
-          yAxisTitle="Number of Accidents"
-      />
-          <LineChart data={prepareChartData(accidentSpotData, 'Number of Accidents', 'rgba(75,192,192,0.2)', 'rgba(75,192,192,1)')} 
-          title="Accident Spot Data" 
-          xAxisTitle="Accident spot"
-          yAxisTitle="Number of Accidents"/>
-          <BarChart data={prepareChartData(collisionTypeData, 'Accident Spot Data', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)')} 
-          title="Collision Type Data" 
-          xAxisTitle="Collision Type"
-          yAxisTitle="Number of Accidents"/>
-          <BarChart data={prepareChartData(weatherData, 'Accident Spot Data', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)')} 
-          title="Weather Data" 
-          xAxisTitle="Weather type"
-          yAxisTitle="Number of Accidents"/>
-          <PieChart data={prepareChartData(mainCauseData, 'Collision Type Data', ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'], ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'])} title="Main Cause Data" />
-          <BarChart data={prepareChartData(laneTypeData, 'Accident Spot Data', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)')} 
-          title="Lane Type Data" 
-          xAxisTitle="Lane type"
-          yAxisTitle="Number of Accidents"/>
-          <LineChart data={prepareChartData(roadTypeData, 'Number of Accidents', 'rgba(75,192,192,0.2)', 'rgba(75,192,192,1)')} 
-          title="Road Type Data" 
-          xAxisTitle="Road type"
-          yAxisTitle="Number of Accidents"/>
-        </div>
-      )}
-    </div>
+    <>
+
+      <Typography variant="h4" align="center" sx={{ mb: 4, mt: 4 }}>
+        Charts
+      </Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={6}>
+          <Box sx={{ p: 2 }}>
+            <BarChart
+              data={prepareChartData(yearData, 'Accident Spot Data', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)')}
+              title="Yearly Data"
+              xAxisTitle="Year"
+              yAxisTitle="Number of Accidents"
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box sx={{ p: 2 }}>
+            <LineChart
+              data={prepareChartData(accidentSpotData, 'Number of Accidents', 'rgba(75,192,192,0.2)', 'rgba(75,192,192,1)')}
+              title="Accident Spot Data"
+              xAxisTitle="Accident spot"
+              yAxisTitle="Number of Accidents"
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box sx={{ p: 2 }}>
+            <LineChart
+              data={prepareChartData(roadTypeData, 'Number of Accidents', 'rgba(75,192,192,0.2)', 'rgba(75,192,192,1)')}
+              title="Road Type Data"
+              xAxisTitle="Road type"
+              yAxisTitle="Number of Accidents"
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box sx={{ p: 2 }}>
+            <BarChart
+              data={prepareChartData(collisionTypeData, 'Accident Spot Data', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)')}
+              title="Collision Type Data"
+              xAxisTitle="Collision Type"
+              yAxisTitle="Number of Accidents"
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box sx={{ p: 2 }}>
+            <BarChart
+              data={prepareChartData(weatherData, 'Accident Spot Data', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)')}
+              title="Weather Data"
+              xAxisTitle="Weather type"
+              yAxisTitle="Number of Accidents"
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box sx={{ p: 2 }}>
+            <BarChart
+              data={prepareChartData(laneTypeData, 'Accident Spot Data', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)')}
+              title="Lane Type Data"
+              xAxisTitle="Lane type"
+              yAxisTitle="Number of Accidents"
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box sx={{ p: 2 }}>
+            <PieChart
+              data={prepareChartData(mainCauseData, 'Collision Type Data', ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'], ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'])}
+              title="Main Cause Data"
+            />
+          </Box>
+        </Grid>
+        {loading && (
+          <Grid item xs={12}>
+            <Typography variant="body1" align="center">
+              Loading...
+            </Typography>
+          </Grid>
+        )}
+      </Grid>
+    </>
   );
 };
 

@@ -23,14 +23,15 @@ const Home = () => {
           <Box sx={{ p: 0.5, mt: 1 }}>
             <MapSection prediction={prediction} />
           </Box>
-          <Box sx={{ p: 0.5, mt: 1 }}>
-            <ChartsSection prediction={prediction} />
-          </Box>
         </Grid>
       </Grid>
+      {prediction !== 'Predict Now!' && (
+        <Box sx={{ p: 0.5, mt: 1 }}>
+          <ChartsSection prediction={prediction} />
+        </Box>
+      )}
     </Container>
   );
 };
 
 export default Home;
-
