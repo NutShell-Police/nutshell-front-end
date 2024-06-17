@@ -20,7 +20,6 @@ const PredictionResult = ({ prediction }) => {
     setLoading(true);
     try {
       const apiKey = import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY;
-      console.log('API Key:', apiKey); // Debugging line
       if (!apiKey) {
         throw new Error('API key is missing');
       }

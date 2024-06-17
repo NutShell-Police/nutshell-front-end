@@ -45,13 +45,27 @@ const About = () => {
 
   return (
     <Container sx={{ maxWidth: '75%' }}>
+      <Box sx={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+          <iframe
+              src="https://www.youtube.com/embed/AtkYhija9ks?si=OQbxVl2qob9_uEyT"
+              title="YouTube video player"
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              style={{
+              width: '80%', 
+              height: '400px', 
+              display: 'block',
+              margin: 'auto'
+              }}
+          ></iframe>
+      </Box>
       <Typography variant="h2" color="primary" sx={{ mb: 4, textAlign: 'center' }}>
         About Us
       </Typography>
       <Typography variant="body1" sx={{ mb: 4 }}>
         Welcome to our project, developed in collaboration with the Karnataka Traffic Police, aimed at enhancing road safety through predictive analytics and thorough traffic analysis. Our mission is to leverage data to predict traffic conditions, identify potential hazards, and ultimately reduce the number of traffic accidents. By providing actionable insights, we strive to make the roads of Karnataka safer for everyone.
       </Typography>
-      <hr/>
+      <hr />
       {teamMembers.map((member, index) => (
         <Box key={index} sx={{ mb: 4 }}>
           <Grid container spacing={2} alignItems="center">

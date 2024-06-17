@@ -1,4 +1,3 @@
-// src/theme.js
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -15,6 +14,9 @@ const theme = createTheme({
     text: {
       primary: '#000000', // Black text
     },
+  },
+  typography: {
+    fontFamily: 'Nunito, sans-serif',
   },
 });
 

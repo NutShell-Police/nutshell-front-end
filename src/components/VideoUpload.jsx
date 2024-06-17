@@ -16,7 +16,7 @@ const VideoUpload = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: 'video/mp4'
+    accept: ['video/mp4', 'video/*'] // Accepting MP4 and other video types
   });
 
   const handleSubmit = async () => {
@@ -83,7 +83,7 @@ const VideoUpload = () => {
       >
         {uploading ? <CircularProgress size={24} /> : 'Submit'}
       </Button>
-      {message && !selectedFile && (
+      {message && (
         <Typography
           variant="body1"
           color={message.includes('Accident') ? 'error' : 'primary'}

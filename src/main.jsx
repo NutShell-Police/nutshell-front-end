@@ -1,22 +1,14 @@
-// src/main.js
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import App from './App';
-import './index.css'; // Ensure this is imported to apply the global styles
+import theme from './theme'; // Import the theme from the theme file
+import './index.css';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: 'Nunito, sans-serif',
-  },
-});
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
 
-// Find the root element
-const container = document.getElementById('root');
-const root = createRoot(container);
-
-// Render the app using the createRoot method
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
