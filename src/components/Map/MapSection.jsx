@@ -16,7 +16,7 @@ const severityColors = {
 const MapSection = ({ prediction }) => {
   const [accidentProneAreas, setAccidentProneAreas] = useState([]);
   const [open, setOpen] = useState(false);
-  const [dataLength, setDataLength] = useState(8000);
+  const [dataLength, setDataLength] = useState(3000);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

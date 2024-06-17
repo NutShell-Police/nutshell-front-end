@@ -3,12 +3,13 @@ import { Container, Grid, Box } from '@mui/material';
 import PredictionForm from '../components/PredictionForm';
 import PredictionResult from '../components/PredictionResult';
 import MapSection from '../components/Map/MapSection';
+import ChartsSection from '../components/Charts/ChartsSection';
 
 const Home = () => {
   const [prediction, setPrediction] = useState('Predict Now!');
 
   return (
-    <Container sx={{ maxWidth: '100%', mt: 4 }}>
+    <Container sx={{ maxWidth: "100%", mt: 4 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
           <Box sx={{ p: 0.5 }}>
@@ -22,6 +23,9 @@ const Home = () => {
           <Box sx={{ p: 0.5, mt: 1 }}>
             <MapSection prediction={prediction} />
           </Box>
+          <Box sx={{ p: 0.5, mt: 1 }}>
+            <ChartsSection prediction={prediction} />
+          </Box>
         </Grid>
       </Grid>
     </Container>
@@ -30,4 +34,3 @@ const Home = () => {
 
 export default Home;
 
-// Home.jsx
