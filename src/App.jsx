@@ -7,38 +7,40 @@ import VideoUploadPage from './pages/VideoUploadPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import FullScreenMap from './components/Map/FullScreenMap';
-import StreamlitComponent from './components/Detection';
-import { Analytics } from "@vercel/analytics/react";
+import StreamlitComponent  from './components/Detection';
+import { Analytics } from "@vercel/analytics/react"
+import  PowerBiReport  from './components/PowerBi';
 
 function App() {
   return (
     <>
-      <Box
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
+      <Header />
+      <Container
+        component="main"
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          minHeight: '100vh',
+          flex: 1,
+          py: 4,
         }}
       >
-        <Header />
-        <Container
-          component="main"
-          sx={{
-            flex: 1,
-            py: 4,
-          }}
-        >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/upload-video" element={<VideoUploadPage />} />
-            <Route path="/map" element={<FullScreenMap />} />
-            <Route path="/detection" element={<StreamlitComponent />} />
-          </Routes>
-        </Container>
-        <Footer />
-      </Box>
-      <Analytics />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/upload-video" element={<VideoUploadPage />} />
+          <Route path="/map" element={<FullScreenMap />} />
+          <Route path="/detection" element={<StreamlitComponent />} />
+          <Route path="/report" element={<PowerBiReport />} />
+        </Routes>
+      </Container>
+      <Footer />
+    </Box>
+    <Analytics />
     </>
   );
 }

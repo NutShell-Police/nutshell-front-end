@@ -68,7 +68,7 @@ const PredictionResult = ({ prediction }) => {
   };
 
   useEffect(() => {
-    if (prediction) {
+    if (prediction && prediction !="Predict Now!") {
       fetchSeverityInfo(prediction);
     }
   }, [prediction]);

@@ -12,7 +12,7 @@ const teamMembers = [
     quote: 'Stay alert, stay alive. Road safety is not just about regulations, but a way of life that requires vigilance and responsibility. My journey into traffic safety began with a close call that made me realize the importance of being aware and cautious on the road.',
     linkedin: 'https://www.linkedin.com/in/thirumurugan12/',
     github: 'https://github.com/thirumurugan12',
-    instagram: 'https://www.instagram.com/thirumurugan12/'
+    instagram: 'https://www.instagram.com/blu.esense/'
   },
   {
     name: 'Venkatesan M',

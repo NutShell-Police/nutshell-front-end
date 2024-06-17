@@ -28,7 +28,7 @@ const MapSection = ({ prediction }) => {
   //       params: {
   //         lat,
   //         lon,
-  //         appid: process.env.REACT_APP_OPENWEATHERMAP_API_KEY,
+  //         appid: import.meta.env.VITE_OPENWEATHERMAP_API_KEY,
   //       },
   //     });
   //     return response.data.weather[0].description;
@@ -43,7 +43,7 @@ const MapSection = ({ prediction }) => {
   //     const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
   //       params: {
   //         latlng: `${lat},${lon}`,
-  //         key: process.env.REACT_APP_GOOGLE_API_KEY,
+  //         key: import.meta.env.VITE_GOOGLE_API_KEY,
   //       },
   //     });
   //     return response.data.results[0]?.formatted_address || 'Unknown';
@@ -63,12 +63,13 @@ const MapSection = ({ prediction }) => {
 
       if (response.status === 200) {
         const data = await response.data;
-        const enrichedData = await Promise.all(data.map(async (area) => {
-          const weather = await fetchWeatherData(area.LATITUDE, area.LONGITUDE);
-          const place = await fetchPlaceName(area.LATITUDE, area.LONGITUDE);
-          return { ...area, weather, place };
-        }));
-        setAccidentProneAreas(enrichedData);
+        // Temporarily disabling weather and place fetching
+        // const enrichedData = await Promise.all(data.map(async (area) => {
+        //   const weather = await fetchWeatherData(area.LATITUDE, area.LONGITUDE);
+        //   const place = await fetchPlaceName(area.LATITUDE, area.LONGITUDE);
+        //   return { ...area, weather, place };
+        // }));
+        setAccidentProneAreas(data); // Setting data directly for now
       } else {
         console.error('Failed to fetch accident-prone areas data. Server responded with status:', response.status);
       }
@@ -159,7 +160,7 @@ const MapSection = ({ prediction }) => {
                       <strong>Main Cause:</strong> {area.main_cause || 'Unknown'}<br />
                       <strong>Road Condition:</strong> {area.road_condition || 'Unknown'}<br />
                       <strong>Severity:</strong> {prediction}<br />
-                      <strong>Weather:</strong> {area.weather}
+                      <strong>Weather:</strong> {area.weather || 'Unknown'}
                     </div>
                   </Popup>
                 </CircleMarker>
@@ -208,7 +209,7 @@ const MapSection = ({ prediction }) => {
                         <strong>Main Cause:</strong> {area.main_cause || 'Unknown'}<br />
                         <strong>Road Condition:</strong> {area.road_condition || 'Unknown'}<br />
                         <strong>Severity:</strong> {prediction}<br />
-                        <strong>Weather:</strong> {area.weather}
+                        <strong>Weather:</strong> {area.weather || 'Unknown'}
                       </div>
                     </Popup>
                   </CircleMarker>

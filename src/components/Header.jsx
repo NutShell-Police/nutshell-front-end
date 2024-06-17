@@ -103,6 +103,14 @@ function Header() {
               {menuItems}
             </Drawer>
           </>
+        ) : (
+          <>
+            <Button color="inherit" component={Link} to="/">Home</Button>
+            <Button color="inherit" component={Link} to="/upload-video">Upload Video</Button>
+            <Button color="inherit" component={Link} to="/about">About</Button>
+            <Button color="inherit" component={Link} to="/detection">Detection</Button>
+            <Button color="inherit" component={Link} to="/report">Report</Button>
+          </>
         )}
       </Toolbar>
     </AppBar>
