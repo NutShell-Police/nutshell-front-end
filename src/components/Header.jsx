@@ -53,12 +53,12 @@ function Header() {
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button component={Link} to="/upload-video">
+        {/* <ListItem button component={Link} to="/upload-video">
           <ListItemIcon sx={{ color: 'white' }}>
             <UploadFileIcon />
           </ListItemIcon>
           <ListItemText primary="Upload Video" />
-        </ListItem>
+        </ListItem> */}
         <ListItem button component={Link} to="/report">
           <ListItemIcon sx={{ color: 'white' }}>
             <ReportIcon />
@@ -96,7 +96,7 @@ function Header() {
           {!isMobile && (
             <>
               <Button color="inherit" component={Link} to="/" sx={{ ml: 2 }}>Home</Button>
-              <Button color="inherit" component={Link} to="/upload-video" sx={{ ml: 2 }}>Upload Video</Button>
+              {/* <Button color="inherit" component={Link} to="/upload-video" sx={{ ml: 2 }}>Upload Video</Button> */}
               <Button color="inherit" component={Link} to="/detection" sx={{ ml: 2 }}>Detection</Button>
               <Button color="inherit" component={Link} to="/report" sx={{ ml: 2 }}>Report</Button>
             </>

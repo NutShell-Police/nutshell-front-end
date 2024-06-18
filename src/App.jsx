@@ -33,7 +33,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/upload-video" element={<VideoUploadPage />} />
+            {/* <Route path="/upload-video" element={<VideoUploadPage />} /> */}
             <Route path="/map" element={<FullScreenMap />} />
             <Route path="/detection" element={<StreamlitComponent />} />
             <Route path="/report" element={<PowerBiReport />} />
