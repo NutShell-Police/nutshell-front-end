@@ -11,7 +11,7 @@ const teamMembers = [
     image: '/thirumurugan.jpg',
     quote: 'Stay alert, stay alive. Road safety is not just about regulations, but a way of life that requires vigilance and responsibility. My journey into traffic safety began with a close call that made me realize the importance of being aware and cautious on the road.',
     linkedin: 'https://www.linkedin.com/in/thirumurugan12/',
-    github: 'https://github.com/thirumurugan12',
+    github: 'https://github.com/Thirumurugan-12',
     instagram: 'https://www.instagram.com/blu.esense/'
   },
   {
@@ -19,24 +19,24 @@ const teamMembers = [
     image: '/venkatesan.jpg',
     quote: 'Safety is not just a slogan, it’s a way of life. Our goal is to create a safer environment through innovative traffic analysis. After witnessing numerous accidents in my hometown, I was inspired to contribute to making our roads safer for everyone.',
     linkedin: 'https://www.linkedin.com/in/venkatesan-m-bba502236/',
-    github: 'https://github.com/venkatesan-m',
-    instagram: 'https://www.instagram.com/venkatesan.m/'
+    github: 'https://github.com/Venkatesan-M',
+    instagram: 'https://www.instagram.com/venkatesan.ipynb/'
   },
   {
     name: 'Rakshana V',
     image: '/rakshana.jpg',
     quote: 'Better late than never. Drive safe. Alongside my twin sister, Raveena, I am committed to making our roads safer. Together, we believe that every small step towards road safety can lead to big changes.',
     linkedin: 'https://www.linkedin.com/in/rakshana-v-1a5210288/',
-    github: 'https://github.com/rakshana-v',
-    instagram: 'https://www.instagram.com/rakshana.v/'
+    github: 'https://github.com/Raksh-iscool',
+    instagram: 'https://www.instagram.com/raksh__h/'
   },
   {
     name: 'Raveena V',
     image: '/raveena.jpg',
     quote: 'Road safety is a state of mind, accident is an absence of mind. As twins, Rakshana and I have always shared a passion for making a positive impact. Our combined efforts in this project aim to leverage data-driven insights to prevent accidents and save lives.',
     linkedin: 'https://www.linkedin.com/in/raveena-v/',
-    github: 'https://github.com/raveena-v',
-    instagram: 'https://www.instagram.com/raveena.v/'
+    github: 'https://github.com/raveena31',
+    instagram: 'https://www.instagram.com/raveena__31/'
   }
 ];
 
