@@ -74,7 +74,8 @@ const ChartsSection = ({ prediction }) => {
 
   return (
     <>
-
+      <br/>
+      <hr/>
       <Typography variant="h4" align="center" sx={{ mb: 4, mt: 4 }}>
         Charts
       </Typography>
