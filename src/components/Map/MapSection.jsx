@@ -168,9 +168,11 @@ const MapSection = ({ prediction }) => {
             </MapContainer>
           )}
         </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop:"10px" }}>
         <Button onClick={handleLoadMore} variant="contained" color="primary" disabled={dataLength >= 48000}>
           Load More Data
         </Button>
+        </Box>
       </Box>
       <Dialog open={open} onClose={handleClose} fullScreen>
         <DialogContent>

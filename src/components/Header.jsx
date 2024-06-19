@@ -82,7 +82,14 @@ function Header() {
   );
 
   return (
-    <AppBar position="static" color="primary" sx={{ fontFamily: 'Nunito, sans-serif', p: 0 }}>
+    <AppBar
+      position="static"
+      sx={{
+        fontFamily: 'Nunito, sans-serif',
+        p: 0,
+        background: 'linear-gradient(45deg, #00008B, #FF0000)', // Gradient from dark blue to light blue
+      }}
+    >
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', p: 0 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', p: 0 }}>
           <Button color="inherit" component={Link} to="/" sx={{ p: 0 }}>
@@ -104,7 +111,7 @@ function Header() {
         </Box>
         {!isMobile ? (
           <Box sx={{ marginLeft: 'auto', p: 0 }}>
-            <Button color="inherit" component={Link} to="/about" sx={{ ml: 2 }}>About</Button>
+            <Button color="inherit" component={Link} to="/about" sx={{ ml: 2}}>About</Button>
           </Box>
         ) : (
           <>

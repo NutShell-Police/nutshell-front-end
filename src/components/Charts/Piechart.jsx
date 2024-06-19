@@ -5,9 +5,18 @@ import { Pie } from 'react-chartjs-2';
 const Piechart = ({ data, title }) => {
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 3,
+        right: 0,
+      },
+      
+    },
     plugins: {
       legend: {
-        position: 'top',
+        position: "right",
+        align: "center",
       },
       title: {
         display: true,
