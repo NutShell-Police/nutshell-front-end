@@ -3,11 +3,11 @@ import { Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 import axios from 'axios';
 
 const severityColors = {
-  'Damage Only': 'gray',
-  'Fatal': 'black',
-  'Grievous Injury': 'red',
-  'Simple Injury': 'yellow',
-  'Unknown': 'blue'
+  'Damage Only': '#FF8C00',  // Dark Orange
+  'Fatal': '#A9A9A9',        // Dark Gray
+  'Grievous Injury': '#DC143C',  // Crimson
+  'Simple Injury': '#DAA520',    // Goldenrod
+  'Unknown': '#4682B4'        // Steel Blue
 };
 
 const PredictionResult = ({ prediction }) => {
