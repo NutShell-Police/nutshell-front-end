@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, MenuItem, Select, Slider, Typography, CircularProgress, Alert, useMediaQuery, useTheme } from '@mui/material';
 import axios from 'axios';
 
-const PredictionForm = ({ setPrediction }) => {
-  const [formData, setFormData] = useState({
-    Noofvehicle_involved: 1,
-    Accident_Classification: '',
-    Accident_Spot: '',
-    Accident_Location: ''
-  });
+const PredictionForm = ({ setPrediction, formData, setFormData }) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -43,10 +37,10 @@ const PredictionForm = ({ setPrediction }) => {
         }
       });
       setPrediction(response.data.prediction);
-      setSuccess('Prediction fetched successfully!');
+      setSuccess('Analysis fetched successfully!');
     } catch (error) {
-      console.error('Error making prediction', error);
-      setError('Failed to fetch prediction. Please try again.');
+      console.error('Error making Analysis', error);
+      setError('Failed to fetch Analysis. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -64,7 +58,7 @@ const PredictionForm = ({ setPrediction }) => {
         bgcolor: 'background.paper'
       }}
     >
-      <Typography variant={isMobile ? 'h5' : 'h4'} sx={{ mb: 1 }}>Prediction Form</Typography>
+      <Typography variant={isMobile ? 'h5' : 'h4'} sx={{ mb: 1 }}>Analytics Form</Typography>
       <Typography variant="h6" sx={{ mb: 1 }}>Please enter the following inputs:</Typography>
 
       <Typography variant="body1" sx={{ mb: 1 }}>No of vehicle involved:</Typography>
@@ -136,7 +130,7 @@ const PredictionForm = ({ setPrediction }) => {
         </Box>
       ) : (
         <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mb: 2 }}>
-          Predict
+          Analyze
         </Button>
       )}
 

@@ -1,36 +1,80 @@
-import React, { useState } from 'react';
-import { Container, Grid, Box } from '@mui/material';
-import PredictionForm from '../components/PredictionForm';
-import PredictionResult from '../components/PredictionResult';
-import MapSection from '../components/Map/MapSection';
-import ChartsSection from '../components/Charts/ChartsSection';
+// Home.jsx
+
+import React from 'react';
+import { Grid, Typography, Box } from '@mui/material';
+import Card from '../components/Card';
 
 const Home = () => {
-  const [prediction, setPrediction] = useState('Predict Now!');
-
   return (
-    <Container sx={{ maxWidth: "100%", mt: 4 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
-          <Box sx={{ p: 0.5 }}>
-            <PredictionForm setPrediction={setPrediction} />
-          </Box>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontFamily: 'Nunito, sans-serif',
+        textAlign: 'center',
+        padding: '15px',
+      }}
+    >
+      <Typography variant="h2" fontWeight="800" color="text.primary" 
+      sx={{ 
+        mb: 2 ,
+        WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+        }}>
+        Project Nutshell
+      </Typography>
+      <Typography
+        variant="h3"
+        fontWeight="800"
+        sx={{
+          mb: 2,
+          fontFamily: 'Roboto, sans-serif',
+          backgroundImage: 'linear-gradient(90deg, rgba(6,0,116,1) 0%, rgba(9,9,121,1) 35%, rgba(0,88,185,1) 100%)',
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          color: 'transparent',
+          textShadow: '2px 2px 4px rgba(0,0,0,0.3)', 
+        }}
+      >
+        P A A R
+      </Typography>
+      <Typography variant="h5" sx={{ mb: 4 }}>
+        Predict - Alert - Analyze - Report
+      </Typography>
+      <Grid container spacing={4} justifyContent="center">
+        <Grid item xs={12} sm={6} md={6} lg={3}>
+          <Card
+            title="Predict"
+            description="Detect accidents using live CCTV footage."
+            link="/prediction"
+          />
         </Grid>
-        <Grid item xs={12} md={8}>
-          <Box sx={{ p: 0.5 }}>
-            <PredictionResult prediction={prediction} />
-          </Box>
-          <Box sx={{ p: 0.5, mt: 1 }}>
-            <MapSection prediction={prediction} />
-          </Box>
+        <Grid item xs={12} sm={6} md={6} lg={3}>
+          <Card
+            title="Alert"
+            description="Alert officials via email and call notifications."
+            link="/prediction"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={6} lg={3}>
+          <Card
+            title="Analyze"
+            description="Analyze accident data using AI tools like Google Gemini."
+            link="/analysis"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={6} lg={3}>
+          <Card
+            title="Report"
+            description="Generate reports with integrated PowerBI."
+            link="/report"
+          />
         </Grid>
       </Grid>
-      {prediction !== 'Predict Now!' && (
-        <Box sx={{ p: 0.5, mt: 1 }}>
-          <ChartsSection prediction={prediction} />
-        </Box>
-      )}
-    </Container>
+    </Box>
   );
 };
 

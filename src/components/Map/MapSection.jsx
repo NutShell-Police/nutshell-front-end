@@ -117,7 +117,7 @@ const MapSection = ({ prediction }) => {
           position: 'relative',
         }}
       >
-        <Typography variant={isMobile ? 'h5' : 'h4'} sx={{ mb: 1 }}>
+        <Typography variant={isMobile ? 'h5' : 'h4'} align='center' sx={{ mb: 1 }}>
           Map
         </Typography>
         <IconButton
@@ -140,7 +140,7 @@ const MapSection = ({ prediction }) => {
               <CircularProgress />
             </Box>
           ) : (
-            <MapContainer center={[15.3173, 78.4760]} zoom={6} style={{ height: '100%', width: '100%' }}>
+            <MapContainer center={[15.3173, 78.4760]} zoom={7} style={{ height: '100%', width: '100%' }}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -149,7 +149,7 @@ const MapSection = ({ prediction }) => {
                 <CircleMarker
                   key={index}
                   center={[area.LATITUDE, area.LONGITUDE]}
-                  radius={10}
+                  radius={5}
                   color={severityColor}
                 >
                   <Popup>
@@ -226,3 +226,4 @@ const MapSection = ({ prediction }) => {
 };
 
 export default MapSection;
+  

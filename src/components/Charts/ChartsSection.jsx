@@ -14,8 +14,9 @@ const fetchDescription = async (data) => {
       {
         parts: [
           {
-            text: `Give a brief data analysis in 100 words about below ${JSON.stringify(data)} vs number of accidents occured`,
+            text: `Analyze the following dataset and provide a summary in 100 words. The dataset contains information on various factors vs the number of accidents that occurred. Focus on identifying key trends, patterns, and any significant insights from the data: ${JSON.stringify(data)}`          
           },
+
         ],
       },
     ],
@@ -50,11 +51,11 @@ const fetchDescription = async (data) => {
 
 const ChartsSection = ({ prediction }) => {
   const [yearData, setYearData] = useState([]);
-  const [yearDesc,setYearDesc]=useState('');
+  const [yearDesc, setYearDesc] = useState('');
   const [accidentSpotData, setAccidentSpotData] = useState([]);
-  const [accidentSpotDesc, setAccidentSpotDesc] = useState([]);
+  const [accidentSpotDesc, setAccidentSpotDesc] = useState('');
   const [collisionTypeData, setCollisionTypeData] = useState([]);
-  const [collisionTypeDesc, setCollisionTypeDesc] = useState([]);
+  const [collisionTypeDesc, setCollisionTypeDesc] = useState('');
   const [weatherData, setWeatherData] = useState([]);
   const [weatherDesc, setWeatherDesc] = useState('');
   const [mainCauseData, setMainCauseData] = useState([]);
@@ -68,7 +69,7 @@ const ChartsSection = ({ prediction }) => {
   
 
   // Function to fetch data from API based on column name
-  const fetchData = async (column, setter,Descsetter) => {
+  const fetchData = async (column, setter, Descsetter) => {
     setLoading(true);
     try {
       const response = await fetch('https://nutshell-api.azurewebsites.net/get_column_data', {
@@ -102,13 +103,13 @@ const ChartsSection = ({ prediction }) => {
   // Load initial data on component mount and whenever prediction or dataLength changes
   useEffect(() => {
     if (prediction) {
-      fetchData('Year', setYearData,setYearDesc);
-      fetchData('Accident_Spot', setAccidentSpotData,setAccidentSpotDesc);
-      fetchData('Collision_Type', setCollisionTypeData,setCollisionTypeDesc);
-      fetchData('Weather', setWeatherData,setWeatherDesc);
-      fetchData('Main_Cause', setMainCauseData,setMainCauseDesc);
-      fetchData('Lane_Type', setLaneTypeData,setLaneTypeDesc);
-      fetchData('Road_Type', setRoadTypeData,setRoadTypeDesc);
+      fetchData('Year', setYearData, setYearDesc);
+      fetchData('Accident_Spot', setAccidentSpotData, setAccidentSpotDesc);
+      fetchData('Collision_Type', setCollisionTypeData, setCollisionTypeDesc);
+      fetchData('Weather', setWeatherData, setWeatherDesc);
+      fetchData('Main_Cause', setMainCauseData, setMainCauseDesc);
+      fetchData('Lane_Type', setLaneTypeData, setLaneTypeDesc);
+      fetchData('Road_Type', setRoadTypeData, setRoadTypeDesc);
     }
   }, [prediction, dataLength]);
 
@@ -128,18 +129,25 @@ const ChartsSection = ({ prediction }) => {
   });
 
   return (
-    <>
-      <br/>
-      <hr/>
-      <Typography variant="h4" align="center" sx={{ mb: 4, mt: 4 }}>
+    <Box
+      sx={{
+        border: '1px solid',
+        borderColor: 'grey.400',
+        borderRadius: 2,
+        boxShadow: 1,
+        bgcolor: 'background.paper',
+        width: '100%',
+        mx: 'auto',
+        p: 2,
+      }}
+    >
+      <Typography variant="h4" align="center" sx={{ mb: 4 }}>
         Charts
       </Typography>
-      <Grid container rowSpacing={4} columnSpacing={10}>
+      <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "2px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
             <BarChart
               data={prepareChartData(
@@ -156,27 +164,21 @@ const ChartsSection = ({ prediction }) => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "1px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
-            <p>{yearDesc}</p>
+            <Typography>{yearDesc}</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "1px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
-            <p>{accidentSpotDesc}</p>
+            <Typography>{accidentSpotDesc}</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "2px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
             <LineChart
               data={prepareChartData(
@@ -193,9 +195,7 @@ const ChartsSection = ({ prediction }) => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "2px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
             <LineChart
               data={prepareChartData(
@@ -212,27 +212,21 @@ const ChartsSection = ({ prediction }) => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "1px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
-            <p>{roadTypeDesc}</p>
+            <Typography>{roadTypeDesc}</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "1px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
-            <p>{collisionTypeDesc}</p>
+            <Typography>{collisionTypeDesc}</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "2px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
             <BarChart
               data={prepareChartData(
@@ -249,9 +243,7 @@ const ChartsSection = ({ prediction }) => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "2px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
             <BarChart
               data={prepareChartData(
@@ -268,27 +260,21 @@ const ChartsSection = ({ prediction }) => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "1px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
-            <p>{weatherDesc}</p>
+            <Typography>{weatherDesc}</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "1px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
-            <p>{laneTypeDesc}</p>
+            <Typography>{laneTypeDesc}</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "2px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
             <BarChart
               data={prepareChartData(
@@ -305,9 +291,7 @@ const ChartsSection = ({ prediction }) => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "2px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
             <PieChart
               data={prepareChartData(
@@ -330,11 +314,9 @@ const ChartsSection = ({ prediction }) => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            sx={{ p: 2, border: "1px solid black", borderRadius: 2 }}
-            height={281}
-            width={562}
+            sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: '100%' }}
           >
-            <p>{mainCauseDesc}</p>
+            <Typography>{mainCauseDesc}</Typography>
           </Box>
         </Grid>
         {loading && (
@@ -345,7 +327,7 @@ const ChartsSection = ({ prediction }) => {
           </Grid>
         )}
       </Grid>
-    </>
+    </Box>
   );
 };
 

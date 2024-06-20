@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Paper, Fab } from '@mui/material';
-import ChatIcon from '@mui/icons-material/Chat';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
+import CustomChatIcon from '/chatbot.png';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,40 +30,33 @@ const Chatbot = () => {
     return greetings.some((greeting) => lowerInput.includes(greeting));
   };
 
+  const generatePrompt = (input) => {
+    if (isGreeting(input)) {
+      return "The user has greeted you. Respond with a polite greeting and ask how you can assist them with traffic safety or emergency information.";
+    }
+    if (isProjectRelated(input)) {
+      return `The user is asking about traffic-related information. Respond with detailed and helpful information about the topic: "${input}". Include practical advice, safety tips, and any necessary emergency procedures.`;
+    }
+    return "The user has asked an unrelated question. Politely inform them that you can only assist with traffic safety, incidents, and emergency information.";
+  };
+
   const handleSendMessage = async () => {
     if (userInput.trim() === '') return;
 
     const newMessage = { sender: 'user', text: userInput };
     setMessages([...messages, newMessage]);
-
-    if (isGreeting(userInput)) {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { sender: 'bot', text: ['Hello! How can I assist you today?'] },
-      ]);
-      setUserInput('');
-      return;
-    }
-
-    if (!isProjectRelated(userInput)) {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { sender: 'bot', text: ['I apologize, but I cannot answer unrelated questions. Please provide a valid input.'] },
-      ]);
-      setUserInput('');
-      return;
-    }
-
     setUserInput('');
     setLoading(true);
 
     try {
+      const prompt = generatePrompt(userInput);
+
       const requestBody = {
         contents: [
           {
             parts: [
               {
-                text: userInput
+                text: prompt
               }
             ]
           }
@@ -105,7 +98,6 @@ const Chatbot = () => {
   return (
     <>
       <Fab
-        color="primary"
         aria-label="chat"
         onClick={() => setIsOpen(!isOpen)}
         sx={{ 
@@ -115,7 +107,7 @@ const Chatbot = () => {
           zIndex: 1500 
         }}
       >
-        {isOpen ? <CloseIcon /> : <ChatIcon />}
+        {isOpen ? <CloseIcon /> : <img src={CustomChatIcon} alt="Chat Icon" style={{ width: '32px', height: '32px' }} />}
       </Fab>
       {isOpen && (
         <Paper elevation={3} sx={{ 
@@ -127,7 +119,7 @@ const Chatbot = () => {
           zIndex: 1400,
           borderRadius: 4 // Increased border radius
         }}>
-          <Typography variant="h6">Chatbot</Typography>
+          <Typography variant="h6" align='center'>AI Traffic Police</Typography>
           <Box sx={{ maxHeight: 300, overflowY: 'auto', my: 2 }}>
             {messages.map((message, index) => (
               <Box key={index} sx={{ mb: 1 }}>

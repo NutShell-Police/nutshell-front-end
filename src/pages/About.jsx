@@ -5,6 +5,9 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { useMediaQuery } from '@mui/material';
 
+// Import your banner image
+import competitionBanner from '/datathon.png';
+
 const teamMembers = [
   {
     name: 'Thirumurugan A',
@@ -48,8 +51,15 @@ const About = () => {
       <Typography variant="h2" color="primary" sx={{ mb: 4, textAlign: 'center' }}>
         About Us
       </Typography>
+      {!isMobile &&       
+      <Box sx={{ textAlign: 'center', mb: 4 }}>
+        <img src={competitionBanner} alt="Competition Banner" style={{ maxWidth: '100%', height: 'auto', borderRadius : '18px' }} />
+      </Box>}
       <Typography variant="body1" sx={{ mb: 4 }}>
-        Welcome to our project, developed in collaboration with the Karnataka Traffic Police, aimed at enhancing road safety through predictive analytics and thorough traffic analysis. Our mission is to leverage data to predict traffic conditions, identify potential hazards, and ultimately reduce the number of traffic accidents. By providing actionable insights, we strive to make the roads of Karnataka safer for everyone.
+        Welcome to our project, developed in collaboration with the Karnataka State Police, aimed at enhancing road safety through predictive analytics and thorough traffic analysis. Our mission is to leverage data to predict traffic conditions, identify potential hazards, and ultimately reduce the number of traffic accidents. By providing actionable insights, we strive to make the roads of Karnataka safer for everyone.
+      </Typography>
+      <Typography variant="h2" color="primary" sx={{ mb: 4, textAlign: 'center' }}>
+        Demo Video
       </Typography>
       <Box sx={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: 4 }}>
         <iframe
@@ -67,6 +77,9 @@ const About = () => {
           }}
         ></iframe>
       </Box>
+      <Typography variant="h2" color="primary" sx={{ mb: 4, textAlign: 'center' }}>
+        Contributors
+      </Typography>
       <hr />
       {teamMembers.map((member, index) => (
         <Box key={index} sx={{ mb: 4 }}>
@@ -110,7 +123,7 @@ const About = () => {
         </Box>
       ))}
       <Typography variant="body1" sx={{ mb: 4 }}>
-        Our application is designed to analyze various factors that contribute to road accidents, such as traffic density, weather conditions, and time of day. By harnessing this information, we aim to provide timely warnings and preventive measures to reduce the likelihood of accidents. This initiative is not just about technology, but about saving lives and making our roads safer for everyone. Together with the Karnataka Traffic Police, we are committed to achieving a significant reduction in traffic incidents and creating a safer environment for all road users.
+        Our application is designed to analyze various factors that contribute to road accidents, such as traffic density, weather conditions, and time of day. By harnessing this information, we aim to provide timely warnings and preventive measures to reduce the likelihood of accidents. This initiative is not just about technology, but about saving lives and making our roads safer for everyone. Together with the Karnataka State Police, we are committed to achieving a significant reduction in traffic incidents and creating a safer environment for all road users.
       </Typography>
     </Container>
   );

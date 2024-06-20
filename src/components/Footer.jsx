@@ -9,13 +9,14 @@ function Footer() {
         width: '100%', 
         py: 0.5, 
         textAlign: 'center', 
-        bgcolor: 'primary.main', 
+        background: 'linear-gradient(90deg, rgba(6,0,116,1) 0%, rgba(9,9,121,1) 35%, rgba(0,88,185,1) 100%)', 
         color: 'primary.contrastText',
-        mt: 'auto' // This ensures the footer is pushed to the bottom
+        fontFamily: 'Nunito, sans-serif',
+        mt: 'auto' 
       }}
     >
       <Typography variant="body2">
-        © 2023 Karnataka Traffic Police. All rights reserved.
+        © 2024 Karnataka State Police. All rights reserved.
       </Typography>
     </Box>
   );

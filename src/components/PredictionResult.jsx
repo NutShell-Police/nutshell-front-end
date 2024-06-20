@@ -10,26 +10,37 @@ const severityColors = {
   'Unknown': '#4682B4'        // Steel Blue
 };
 
-const PredictionResult = ({ prediction }) => {
+const PredictionResult = ({ prediction, formData }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [severityInfo, setSeverityInfo] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchSeverityInfo = async (prediction) => {
+  const fetchSeverityInfo = async (prediction, formData) => {
     setLoading(true);
     try {
       const apiKey = import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY;
       if (!apiKey) {
         throw new Error('API key is missing');
       }
-
+      console.log(formData)
       const requestBody = {
         contents: [
           {
             parts: [
               {
-                text: `what is ${prediction} in accident in short?`
+                text: `
+                  Given the following accident prediction and user input data, provide a detailed explanation of the analysis in 180 words. 
+                  The explanation should cover potential causes, conditions, and implications of the analysis, focusing on safety measures and relevant statistics if available.
+
+                  User Input Data: 
+                  ${JSON.stringify(formData, null, 2)}
+
+                  Prediction: 
+                  ${prediction}
+
+                  Please ensure the explanation is clear, concise, and informative.
+                `              
               }
             ]
           }
@@ -67,8 +78,8 @@ const PredictionResult = ({ prediction }) => {
   };
 
   useEffect(() => {
-    if (prediction && prediction !="Predict Now!") {
-      fetchSeverityInfo(prediction);
+    if (prediction && prediction !="Analyze Now!") {
+      fetchSeverityInfo(prediction, formData);
     }
   }, [prediction]);
 
@@ -88,7 +99,7 @@ const PredictionResult = ({ prediction }) => {
       }}
     >
       <Typography variant={isMobile ? 'h5' : 'h4'} sx={{ mb: 1 }}>
-        Prediction Result
+        Analytics
       </Typography>
       <Typography variant={isMobile ? 'h6' : 'h5'} style={{ color: severityColor }}>
         {prediction}
