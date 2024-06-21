@@ -23,10 +23,12 @@ A probability model is then developed to predict the likelihood of traffic accid
 ![KSP diagram](https://github.com/NutShell-Police/nutshell-front-end/assets/127939893/84642b21-2e6d-47b8-86c4-6e62ac6a4bf1)
 
 
-## Old Snapshots of Final Product
+##  Snapshots of Final Product
 
-![Untitled design](https://github.com/Thirumurugan-12/nutshell-accident/assets/127939893/b4b7ad1a-ed28-4d32-9a9f-50224ca46b87)
+![17](https://github.com/Venkatesan-M/nutshell-front-end/assets/127939893/9ca3dc51-26a8-42a1-8c2b-416fc575e3cc)
 
+
+![18](https://github.com/Venkatesan-M/nutshell-front-end/assets/127939893/648b1563-4612-42d8-8b67-8f0534c81b65)
 
 
 ## Run Locally
