@@ -77,9 +77,10 @@ const About = () => {
           }}
         ></iframe>
       </Box>
+      {!isMobile &&
       <Typography variant="h2" color="primary" sx={{ mb: 4, textAlign: 'center' }}>
         Contributors
-      </Typography>
+      </Typography>}
       <hr />
       {teamMembers.map((member, index) => (
         <Box key={index} sx={{ mb: 4 }}>
